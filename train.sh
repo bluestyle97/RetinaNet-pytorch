@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+CUDA_VISIBLE_DEVICES=0,1,2,3 screen python main.py train \
+        --backbone fpn50 \
+        --dataset coco \
+        --data_root /root/datasets/COCO \
+        --num_classes 80 \
+        --num_features 256 \
+        --cuda \
+        --resize 400 \
+        --max_size 600 \
+        --batch_size 16 \
+        --lr 0.01 \
+        --weight_decay 0.0001 \
+        --momentum 0.9 \
+        --milestones 60000 80000 \
+        --focal_alpha 0.25 \
+        --focal_gamma 2.0 \
+        --smoothl1_beta 0.11 \
+        --max_iters 90000 \
+        --summary_step 100 \
+        --save_step 10000 \
+        --val_step 5000 \
+        --summary_dir experiments/summaries \
+        --checkpoint_dir experiments/checkpoints \
+        --log_dir experiments/logs \
+        --dec_threshold 0.05 \
+        --nms_threshold 0.5 \
+        --topn 1000 \
+        --ndetections 100
